@@ -40,13 +40,17 @@
             this.nudNumberOfVersions = new System.Windows.Forms.NumericUpDown();
             this.lblNumberOfVersions = new System.Windows.Forms.Label();
             this.gpbBasicInfo = new System.Windows.Forms.GroupBox();
+            this.cbxDisabled = new System.Windows.Forms.CheckBox();
             this.lblOutputFolder = new System.Windows.Forms.Label();
             this.dsrOutputFolder = new FileBackuper.Controls.DirectorySelector();
             this.gpbUnits = new System.Windows.Forms.GroupBox();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.lblUnitsNote = new System.Windows.Forms.Label();
             this.lvwUnits = new System.Windows.Forms.ListView();
             this.chdType = ((System.Windows.Forms.ColumnHeader) (new System.Windows.Forms.ColumnHeader()));
             this.chdPath = ((System.Windows.Forms.ColumnHeader) (new System.Windows.Forms.ColumnHeader()));
+            this.cmsUnits = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.rbnFolder = new System.Windows.Forms.RadioButton();
             this.rbnFile = new System.Windows.Forms.RadioButton();
             this.dsrFolder = new FileBackuper.Controls.DirectorySelector();
@@ -56,9 +60,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.cmsUnits = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbVersions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.nudNumberOfVersions)).BeginInit();
             this.gpbBasicInfo.SuspendLayout();
@@ -81,7 +82,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxName.Location = new System.Drawing.Point(80, 23);
             this.tbxName.Name = "tbxName";
-            this.tbxName.Size = new System.Drawing.Size(533, 20);
+            this.tbxName.Size = new System.Drawing.Size(453, 20);
             this.tbxName.TabIndex = 1;
             // 
             // lblFileNamePattern
@@ -189,6 +190,7 @@
             // 
             this.gpbBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbBasicInfo.Controls.Add(this.cbxDisabled);
             this.gpbBasicInfo.Controls.Add(this.lblOutputFolder);
             this.gpbBasicInfo.Controls.Add(this.dsrOutputFolder);
             this.gpbBasicInfo.Controls.Add(this.lblName);
@@ -199,6 +201,17 @@
             this.gpbBasicInfo.TabIndex = 5;
             this.gpbBasicInfo.TabStop = false;
             this.gpbBasicInfo.Text = "Basic settings";
+            // 
+            // cbxDisabled
+            // 
+            this.cbxDisabled.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxDisabled.AutoSize = true;
+            this.cbxDisabled.Location = new System.Drawing.Point(546, 25);
+            this.cbxDisabled.Name = "cbxDisabled";
+            this.cbxDisabled.Size = new System.Drawing.Size(67, 17);
+            this.cbxDisabled.TabIndex = 4;
+            this.cbxDisabled.Text = "Disabled";
+            this.cbxDisabled.UseVisualStyleBackColor = true;
             // 
             // lblOutputFolder
             // 
@@ -240,15 +253,26 @@
             this.gpbUnits.TabStop = false;
             this.gpbUnits.Text = "Files and Folders";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Location = new System.Drawing.Point(538, 23);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 55);
+            this.btnAdd.TabIndex = 7;
+            this.btnAdd.Text = "A&dd";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
             // lblUnitsNote
             // 
             this.lblUnitsNote.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblUnitsNote.AutoSize = true;
             this.lblUnitsNote.Location = new System.Drawing.Point(6, 339);
             this.lblUnitsNote.Name = "lblUnitsNote";
-            this.lblUnitsNote.Size = new System.Drawing.Size(325, 13);
+            this.lblUnitsNote.Size = new System.Drawing.Size(320, 13);
             this.lblUnitsNote.TabIndex = 6;
-            this.lblUnitsNote.Text = "( To remove items, right click on a sngle row and select \"Remove\" )";
+            this.lblUnitsNote.Text = "( To remove item, right click on a sngle row and select \"Remove\" )";
             // 
             // lvwUnits
             // 
@@ -261,6 +285,7 @@
             this.lvwUnits.ContextMenuStrip = this.cmsUnits;
             this.lvwUnits.FullRowSelect = true;
             this.lvwUnits.GridLines = true;
+            this.lvwUnits.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvwUnits.Location = new System.Drawing.Point(9, 89);
             this.lvwUnits.Name = "lvwUnits";
             this.lvwUnits.Size = new System.Drawing.Size(604, 247);
@@ -276,6 +301,21 @@
             // 
             this.chdPath.Text = "Path";
             this.chdPath.Width = 400;
+            // 
+            // cmsUnits
+            // 
+            this.cmsUnits.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmDelete});
+            this.cmsUnits.Name = "cmsUnits";
+            this.cmsUnits.Size = new System.Drawing.Size(108, 26);
+            this.cmsUnits.Opening += new System.ComponentModel.CancelEventHandler(this.cmsUnits_Opening);
+            // 
+            // tsmDelete
+            // 
+            this.tsmDelete.Name = "tsmDelete";
+            this.tsmDelete.Size = new System.Drawing.Size(152, 22);
+            this.tsmDelete.Text = "&Delete";
+            this.tsmDelete.Click += new System.EventHandler(this.tsmDelete_Click);
             // 
             // rbnFolder
             // 
@@ -340,7 +380,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = "Close";
+            this.btnClose.Text = "&Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -351,7 +391,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.ClientSizeChanged += new System.EventHandler(this.btnSave_Click);
             // 
@@ -362,7 +402,7 @@
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(110, 23);
             this.btnSaveAndClose.TabIndex = 9;
-            this.btnSaveAndClose.Text = "Save and Close";
+            this.btnSaveAndClose.Text = "S&ave and Close";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
@@ -378,32 +418,6 @@
             this.lblMessage.TabIndex = 10;
             this.lblMessage.Text = "Some errors occured!";
             this.lblMessage.Visible = false;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(538, 23);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 55);
-            this.btnAdd.TabIndex = 7;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // cmsUnits
-            // 
-            this.cmsUnits.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmDelete});
-            this.cmsUnits.Name = "cmsUnits";
-            this.cmsUnits.Size = new System.Drawing.Size(108, 26);
-            this.cmsUnits.Opening += new System.ComponentModel.CancelEventHandler(this.cmsUnits_Opening);
-            // 
-            // tsmDelete
-            // 
-            this.tsmDelete.Name = "tsmDelete";
-            this.tsmDelete.Size = new System.Drawing.Size(152, 22);
-            this.tsmDelete.Text = "&Delete";
-            this.tsmDelete.Click += new System.EventHandler(this.tsmDelete_Click);
             // 
             // ProfileDetail
             // 
@@ -465,5 +479,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip cmsUnits;
         private System.Windows.Forms.ToolStripMenuItem tsmDelete;
+        private System.Windows.Forms.CheckBox cbxDisabled;
     }
 }
