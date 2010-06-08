@@ -18,6 +18,9 @@ namespace FileBackuper.GUI
     /// <param name="e">Argumenty udalosti</param>
     public delegate void DetailButtonHandler(object sender, EventArgs e);
 
+    /// <summary>
+    /// Druh zobrazovane zpravy
+    /// </summary>
     public enum MessageType { Error, Warning, Success };
 
     /// <summary>
@@ -49,6 +52,8 @@ namespace FileBackuper.GUI
             InitializePatters();
 
             Profile = profile;
+
+            tbxName.Focus();
         }
 
         /// <summary>
@@ -75,6 +80,7 @@ namespace FileBackuper.GUI
             dsrOutputFolder.Value = Profile.OutputFolder;
             cbxPeriod.SelectedIndex = (int) Profile.Period;
             nudNumberOfVersions.Value = Profile.NumberOfVersions;
+            cbxDisabled.Checked = Profile.Disabled;
 
             UpdateFileNamePatternsItems(Profile.Period);
 
@@ -105,18 +111,12 @@ namespace FileBackuper.GUI
             Profile.Period = (TimePeriod) cbxPeriod.SelectedIndex;
             Profile.NumberOfVersions = (int) nudNumberOfVersions.Value;
             Profile.FileNamePattern = (string) cbxFileNamePattern.SelectedItem;
+            Profile.Disabled = cbxDisabled.Checked;
 
             Profile.Units.Clear();
             foreach (ListViewItem item in lvwUnits.Items)
             {
-                if (ModelUtil.StringToUnitType(item.SubItems[0].Text).Equals(UnitType.File))
-                {
-                    Profile.Units.Add(new ZipFile(item.SubItems[1].Text));
-                }
-                else
-                {
-                    Profile.Units.Add(new ZipFolder(item.SubItems[1].Text));
-                }
+                Profile.Units.Add(new ZipUnit(ModelUtil.StringToUnitType(item.SubItems[0].Text).Equals(UnitType.File) ? UnitType.File : UnitType.Folder, item.SubItems[1].Text));
             }
         }
 
@@ -144,7 +144,7 @@ namespace FileBackuper.GUI
         /// <param name="type">Typ hlasky (barva)</param>
         public void ShowMessage(string message, MessageType type)
         {
-            lblMessage.Text = message.Length > 40 ? message.Substring(0, 40) + " ..." : message;
+            lblMessage.Text = message.Length > 60 ? message.Substring(0, 40) + " ..." : message;
             Color[] colors = { Color.Red, Color.Orange, Color.Green};
             lblMessage.ForeColor = colors[(int) type];
             lblMessage.Visible = true;
@@ -170,6 +170,41 @@ namespace FileBackuper.GUI
                 if (item.SubItems[1].Text.Equals(path))
                 {
                     return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Zjistuje zda zadana cesta neni vystupni slozkou
+        /// </summary>
+        /// <param name="path">Testovana cesta</param>
+        /// <returns>true pokud je, false jinak</returns>
+        public bool IsOutputFolder(string path)
+        {
+            return dsrOutputFolder.Value.Equals(path);
+        }
+
+        /// <summary>
+        /// Zjistuje zda posledni slozka ze zadane cesty jiz je mezi slozkami k zalohovani
+        /// </summary>
+        /// <param name="path">Testovana cesta</param>
+        /// <returns>true pokud posledni slozka ze zadane cesty jiz je mezi slozkami, false jinak</returns>
+        public bool IsLastFolderInUnits(string path)
+        {
+            string[] folders = path.Split('\\');
+            string folder = folders[folders.Length - 1];
+
+            foreach (ListViewItem lvi in lvwUnits.Items)
+            {
+                if (lvi.SubItems[0].Text.Equals(ModelUtil.UnitTypeToString(UnitType.Folder)))
+                {
+                    folders = lvi.SubItems[1].Text.Split('\\');
+                    if (folder.Equals(folders[folders.Length - 1]))
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -244,8 +279,22 @@ namespace FileBackuper.GUI
                     ListViewItem lvi = new ListViewItem(cols);
                     if (!IsInUnits(cols[1]))
                     {
-                        lvwUnits.Items.Add(lvi);
-                        ShowMessage(String.Format("Added {0} {1}.", cols[0], cols[1]), MessageType.Success);
+                        if ((!rbnFile.Checked && !IsLastFolderInUnits(cols[1])) || rbnFile.Checked)
+                        {
+                            if (!IsOutputFolder(cols[1]))
+                            {
+                                lvwUnits.Items.Add(lvi);
+                                ShowMessage(String.Format("Added {0} {1}.", cols[0], cols[1]), MessageType.Success);
+                            }
+                            else
+                            {
+                                ShowMessage("Profile can't contain its output folder!", MessageType.Error);
+                            }
+                        }
+                        else
+                        {
+                            ShowMessage("Profile already containts folder with this name!", MessageType.Error);
+                        }
                     }
                     else
                     {

@@ -73,7 +73,7 @@ namespace FileBackuper.Model
         /// <summary>
         /// Nazvy souboru s poslednimi verzemi
         /// </summary>
-        private List<string> versionsNames;
+        private List<string> versionsNames = new List<string>();
         public List<string> VersionsNames
         {
             get { return versionsNames; }
@@ -90,6 +90,16 @@ namespace FileBackuper.Model
             set { units = value; }
         }
 
+        /// <summary>
+        /// Indikuje zda je profil neaktivni
+        /// </summary>
+        private bool disabled;
+        public bool Disabled
+        {
+            get { return disabled; }
+            set { disabled = value; }
+        }
+
         public Profile()
         {
             
@@ -97,38 +107,23 @@ namespace FileBackuper.Model
     }
 
     /// <summary>
-    /// Rozhrani pro ukladani souboru/slozek do profilu
+    /// Trida pro ukladani zaznamu o souborech/slozkach k zalohovani
     /// </summary>
-    public interface ZipUnit
+    public class ZipUnit
     {
         /// <summary>
         /// Typ unitu
         /// </summary>
-        UnitType UnitType
+        private UnitType unitType;
+        public UnitType UnitType
         {
-            get;
+            get { return unitType; }
+            set { unitType = value; }
         }
 
         /// <summary>
         /// Cesta k souboru/slozce
         /// </summary>
-        string Path
-        {
-            get;
-            set;
-        }
-    }
-
-    /// <summary>
-    /// Implementace souboru pro ukladani
-    /// </summary>
-    public class ZipFile : ZipUnit
-    {
-        public UnitType UnitType
-        {
-            get { return UnitType.File; }
-        }
-
         private string path;
         public string Path
         {
@@ -137,48 +132,18 @@ namespace FileBackuper.Model
         }
 
         /// <summary>
-        /// Nenastavi cestu, je treba donastavit dale
+        /// Vytvori prazdnou instanci, je potreba dovyplnit type a path
         /// </summary>
-        public ZipFile() { }
+        public ZipUnit() { }
 
         /// <summary>
-        /// Vytvori zip soubor se zadanou cestou
+        /// Nastavi type a path
         /// </summary>
-        /// <param name="path">Cesta k souboru</param>
-        public ZipFile(string path)
+        /// <param name="type">Typ unitu</param>
+        /// <param name="path">Cesta k souboru/slozce</param>
+        public ZipUnit(UnitType type, string path)
         {
-            Path = path;
-        }
-    }
-
-    /// <summary>
-    /// Implementace slozky pro ukladani
-    /// </summary>
-    public class ZipFolder : ZipUnit
-    {
-        public UnitType UnitType
-        {
-            get { return UnitType.Folder; }
-        }
-
-        private string path;
-        public string Path
-        {
-            get { return path; }
-            set { path = value; }
-        }
-
-        /// <summary>
-        /// Nenastavi cestu, je treba donastavit dale
-        /// </summary>
-        public ZipFolder() { }
-
-        /// <summary>
-        /// Vytvori zip slozku se zadanou cestou
-        /// </summary>
-        /// <param name="path">Ceska ke slozce</param>
-        public ZipFolder(string path)
-        {
+            UnitType = type;
             Path = path;
         }
     }
