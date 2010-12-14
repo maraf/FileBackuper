@@ -29,26 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileDetail));
             this.lblName = new System.Windows.Forms.Label();
             this.tbxName = new System.Windows.Forms.TextBox();
             this.lblFileNamePattern = new System.Windows.Forms.Label();
             this.cbxFileNamePattern = new System.Windows.Forms.ComboBox();
             this.gpbVersions = new System.Windows.Forms.GroupBox();
+            this.nudMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudHours = new System.Windows.Forms.NumericUpDown();
+            this.lblStartAt = new System.Windows.Forms.Label();
             this.cbxPeriod = new System.Windows.Forms.ComboBox();
             this.lblPeriod = new System.Windows.Forms.Label();
             this.lblNumberOfVersionsNote = new System.Windows.Forms.Label();
             this.nudNumberOfVersions = new System.Windows.Forms.NumericUpDown();
             this.lblNumberOfVersions = new System.Windows.Forms.Label();
             this.gpbBasicInfo = new System.Windows.Forms.GroupBox();
-            this.cbxDisabled = new System.Windows.Forms.CheckBox();
+            this.chxDisabled = new System.Windows.Forms.CheckBox();
             this.lblOutputFolder = new System.Windows.Forms.Label();
             this.dsrOutputFolder = new FileBackuper.Controls.DirectorySelector();
             this.gpbUnits = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblUnitsNote = new System.Windows.Forms.Label();
             this.lvwUnits = new System.Windows.Forms.ListView();
-            this.chdType = ((System.Windows.Forms.ColumnHeader) (new System.Windows.Forms.ColumnHeader()));
-            this.chdPath = ((System.Windows.Forms.ColumnHeader) (new System.Windows.Forms.ColumnHeader()));
+            this.chdType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chdPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmsUnits = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.rbnFolder = new System.Windows.Forms.RadioButton();
@@ -60,8 +64,11 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.totToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.gpbVersions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.nudNumberOfVersions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumberOfVersions)).BeginInit();
             this.gpbBasicInfo.SuspendLayout();
             this.gpbUnits.SuspendLayout();
             this.cmsUnits.SuspendLayout();
@@ -78,7 +85,7 @@
             // 
             // tbxName
             // 
-            this.tbxName.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tbxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxName.Location = new System.Drawing.Point(80, 23);
             this.tbxName.Name = "tbxName";
@@ -96,7 +103,7 @@
             // 
             // cbxFileNamePattern
             // 
-            this.cbxFileNamePattern.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cbxFileNamePattern.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxFileNamePattern.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFileNamePattern.FormattingEnabled = true;
@@ -104,13 +111,16 @@
             "ProfileName_YYYY-MM-dd"});
             this.cbxFileNamePattern.Location = new System.Drawing.Point(100, 46);
             this.cbxFileNamePattern.Name = "cbxFileNamePattern";
-            this.cbxFileNamePattern.Size = new System.Drawing.Size(284, 21);
+            this.cbxFileNamePattern.Size = new System.Drawing.Size(226, 21);
             this.cbxFileNamePattern.TabIndex = 3;
             // 
             // gpbVersions
             // 
-            this.gpbVersions.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gpbVersions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbVersions.Controls.Add(this.nudMinutes);
+            this.gpbVersions.Controls.Add(this.nudHours);
+            this.gpbVersions.Controls.Add(this.lblStartAt);
             this.gpbVersions.Controls.Add(this.cbxPeriod);
             this.gpbVersions.Controls.Add(this.lblPeriod);
             this.gpbVersions.Controls.Add(this.lblNumberOfVersionsNote);
@@ -125,15 +135,51 @@
             this.gpbVersions.TabStop = false;
             this.gpbVersions.Text = "Versions";
             // 
+            // nudMinutes
+            // 
+            this.nudMinutes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudMinutes.Location = new System.Drawing.Point(393, 47);
+            this.nudMinutes.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.nudMinutes.Name = "nudMinutes";
+            this.nudMinutes.Size = new System.Drawing.Size(38, 20);
+            this.nudMinutes.TabIndex = 12;
+            // 
+            // nudHours
+            // 
+            this.nudHours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudHours.Location = new System.Drawing.Point(348, 47);
+            this.nudHours.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.nudHours.Name = "nudHours";
+            this.nudHours.Size = new System.Drawing.Size(39, 20);
+            this.nudHours.TabIndex = 11;
+            // 
+            // lblStartAt
+            // 
+            this.lblStartAt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStartAt.AutoSize = true;
+            this.lblStartAt.Location = new System.Drawing.Point(345, 20);
+            this.lblStartAt.Name = "lblStartAt";
+            this.lblStartAt.Size = new System.Drawing.Size(44, 13);
+            this.lblStartAt.TabIndex = 10;
+            this.lblStartAt.Text = "Start at:";
+            // 
             // cbxPeriod
             // 
-            this.cbxPeriod.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cbxPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPeriod.FormattingEnabled = true;
             this.cbxPeriod.Items.AddRange(new object[] {
             "No period",
-            "One hours",
+            "One hour",
             "Three hours",
             "Five hours",
             "Twelve hours",
@@ -145,7 +191,7 @@
             "One month"});
             this.cbxPeriod.Location = new System.Drawing.Point(167, 17);
             this.cbxPeriod.Name = "cbxPeriod";
-            this.cbxPeriod.Size = new System.Drawing.Size(217, 21);
+            this.cbxPeriod.Size = new System.Drawing.Size(159, 21);
             this.cbxPeriod.TabIndex = 9;
             this.cbxPeriod.SelectedIndexChanged += new System.EventHandler(this.cbxPeriod_SelectedIndexChanged);
             // 
@@ -160,9 +206,9 @@
             // 
             // lblNumberOfVersionsNote
             // 
-            this.lblNumberOfVersionsNote.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNumberOfVersionsNote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNumberOfVersionsNote.AutoSize = true;
-            this.lblNumberOfVersionsNote.Location = new System.Drawing.Point(402, 41);
+            this.lblNumberOfVersionsNote.Location = new System.Drawing.Point(437, 41);
             this.lblNumberOfVersionsNote.Name = "lblNumberOfVersionsNote";
             this.lblNumberOfVersionsNote.Size = new System.Drawing.Size(176, 13);
             this.lblNumberOfVersionsNote.TabIndex = 7;
@@ -170,17 +216,27 @@
             // 
             // nudNumberOfVersions
             // 
-            this.nudNumberOfVersions.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudNumberOfVersions.Location = new System.Drawing.Point(528, 18);
+            this.nudNumberOfVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudNumberOfVersions.Location = new System.Drawing.Point(563, 18);
+            this.nudNumberOfVersions.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudNumberOfVersions.Name = "nudNumberOfVersions";
-            this.nudNumberOfVersions.Size = new System.Drawing.Size(85, 20);
+            this.nudNumberOfVersions.Size = new System.Drawing.Size(50, 20);
             this.nudNumberOfVersions.TabIndex = 6;
+            this.nudNumberOfVersions.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblNumberOfVersions
             // 
-            this.lblNumberOfVersions.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNumberOfVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNumberOfVersions.AutoSize = true;
-            this.lblNumberOfVersions.Location = new System.Drawing.Point(402, 20);
+            this.lblNumberOfVersions.Location = new System.Drawing.Point(437, 20);
             this.lblNumberOfVersions.Name = "lblNumberOfVersions";
             this.lblNumberOfVersions.Size = new System.Drawing.Size(120, 13);
             this.lblNumberOfVersions.TabIndex = 4;
@@ -188,9 +244,9 @@
             // 
             // gpbBasicInfo
             // 
-            this.gpbBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gpbBasicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gpbBasicInfo.Controls.Add(this.cbxDisabled);
+            this.gpbBasicInfo.Controls.Add(this.chxDisabled);
             this.gpbBasicInfo.Controls.Add(this.lblOutputFolder);
             this.gpbBasicInfo.Controls.Add(this.dsrOutputFolder);
             this.gpbBasicInfo.Controls.Add(this.lblName);
@@ -202,16 +258,16 @@
             this.gpbBasicInfo.TabStop = false;
             this.gpbBasicInfo.Text = "Basic settings";
             // 
-            // cbxDisabled
+            // chxDisabled
             // 
-            this.cbxDisabled.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxDisabled.AutoSize = true;
-            this.cbxDisabled.Location = new System.Drawing.Point(546, 25);
-            this.cbxDisabled.Name = "cbxDisabled";
-            this.cbxDisabled.Size = new System.Drawing.Size(67, 17);
-            this.cbxDisabled.TabIndex = 4;
-            this.cbxDisabled.Text = "Disabled";
-            this.cbxDisabled.UseVisualStyleBackColor = true;
+            this.chxDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chxDisabled.AutoSize = true;
+            this.chxDisabled.Location = new System.Drawing.Point(546, 25);
+            this.chxDisabled.Name = "chxDisabled";
+            this.chxDisabled.Size = new System.Drawing.Size(67, 17);
+            this.chxDisabled.TabIndex = 4;
+            this.chxDisabled.Text = "Disabled";
+            this.chxDisabled.UseVisualStyleBackColor = true;
             // 
             // lblOutputFolder
             // 
@@ -224,7 +280,7 @@
             // 
             // dsrOutputFolder
             // 
-            this.dsrOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.dsrOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dsrOutputFolder.Location = new System.Drawing.Point(9, 71);
             this.dsrOutputFolder.MinimumSize = new System.Drawing.Size(200, 31);
@@ -235,7 +291,7 @@
             // 
             // gpbUnits
             // 
-            this.gpbUnits.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gpbUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbUnits.Controls.Add(this.btnAdd);
@@ -255,7 +311,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Location = new System.Drawing.Point(538, 23);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 55);
@@ -266,7 +322,7 @@
             // 
             // lblUnitsNote
             // 
-            this.lblUnitsNote.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblUnitsNote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblUnitsNote.AutoSize = true;
             this.lblUnitsNote.Location = new System.Drawing.Point(6, 339);
             this.lblUnitsNote.Name = "lblUnitsNote";
@@ -276,7 +332,7 @@
             // 
             // lvwUnits
             // 
-            this.lvwUnits.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lvwUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwUnits.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -313,7 +369,7 @@
             // tsmDelete
             // 
             this.tsmDelete.Name = "tsmDelete";
-            this.tsmDelete.Size = new System.Drawing.Size(152, 22);
+            this.tsmDelete.Size = new System.Drawing.Size(107, 22);
             this.tsmDelete.Text = "&Delete";
             this.tsmDelete.Click += new System.EventHandler(this.tsmDelete_Click);
             // 
@@ -342,7 +398,7 @@
             // 
             // dsrFolder
             // 
-            this.dsrFolder.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.dsrFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dsrFolder.Enabled = false;
             this.dsrFolder.Location = new System.Drawing.Point(245, 52);
@@ -354,7 +410,7 @@
             // 
             // fsrFile
             // 
-            this.fsrFile.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.fsrFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.fsrFile.Location = new System.Drawing.Point(245, 19);
             this.fsrFile.MaximumSize = new System.Drawing.Size(2000, 31);
@@ -375,7 +431,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(559, 589);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -386,18 +442,18 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(473, 589);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.ClientSizeChanged += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnSaveAndClose
             // 
-            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveAndClose.Location = new System.Drawing.Point(330, 589);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(110, 23);
@@ -408,9 +464,9 @@
             // 
             // lblMessage
             // 
-            this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.ForeColor = System.Drawing.Color.Red;
             this.lblMessage.Location = new System.Drawing.Point(21, 594);
             this.lblMessage.Name = "lblMessage";
@@ -418,6 +474,10 @@
             this.lblMessage.TabIndex = 10;
             this.lblMessage.Text = "Some errors occured!";
             this.lblMessage.Visible = false;
+            // 
+            // totToolTip
+            // 
+            this.totToolTip.IsBalloon = true;
             // 
             // ProfileDetail
             // 
@@ -431,12 +491,15 @@
             this.Controls.Add(this.gpbUnits);
             this.Controls.Add(this.gpbBasicInfo);
             this.Controls.Add(this.gpbVersions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(662, 662);
             this.Name = "ProfileDetail";
             this.Text = "ProfileDetail";
             this.gpbVersions.ResumeLayout(false);
             this.gpbVersions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.nudNumberOfVersions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumberOfVersions)).EndInit();
             this.gpbBasicInfo.ResumeLayout(false);
             this.gpbBasicInfo.PerformLayout();
             this.gpbUnits.ResumeLayout(false);
@@ -479,6 +542,10 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip cmsUnits;
         private System.Windows.Forms.ToolStripMenuItem tsmDelete;
-        private System.Windows.Forms.CheckBox cbxDisabled;
+        private System.Windows.Forms.CheckBox chxDisabled;
+        private System.Windows.Forms.NumericUpDown nudMinutes;
+        private System.Windows.Forms.NumericUpDown nudHours;
+        private System.Windows.Forms.Label lblStartAt;
+        private System.Windows.Forms.ToolTip totToolTip;
     }
 }

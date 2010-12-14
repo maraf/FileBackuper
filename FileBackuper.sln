@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBackuper.TestConsole", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBackuper.Logic", "FileBackuper.Logic\FileBackuper.Logic.csproj", "{481132A3-D269-4952-B582-42C69C4891F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBackuper.BackuperConsole", "FileBackuper.BackuperConsole\FileBackuper.BackuperConsole.csproj", "{146FA452-060A-4741-B5EF-4DB3F09D25FF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FileBackuper.Installer", "FileBackuper.Installer\FileBackuper.Installer.vdproj", "{36A56D0A-9158-4F7E-967C-375BEAD4A600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +75,22 @@ Global
 		{481132A3-D269-4952-B582-42C69C4891F4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{481132A3-D269-4952-B582-42C69C4891F4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{481132A3-D269-4952-B582-42C69C4891F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Debug|x86.ActiveCfg = Debug|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Debug|x86.Build.0 = Debug|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Release|Any CPU.ActiveCfg = Release|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Release|Mixed Platforms.Build.0 = Release|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Release|x86.ActiveCfg = Release|x86
+		{146FA452-060A-4741-B5EF-4DB3F09D25FF}.Release|x86.Build.0 = Release|x86
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Debug|Any CPU.ActiveCfg = Debug
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Debug|x86.ActiveCfg = Debug
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Release|Any CPU.ActiveCfg = Release
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Release|Mixed Platforms.ActiveCfg = Release
+		{36A56D0A-9158-4F7E-967C-375BEAD4A600}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

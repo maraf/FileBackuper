@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -11,6 +13,7 @@ using FileBackuper.Model;
 using Ionic.Zip;
 using Quartz;
 using Quartz.Impl;
+using TaskScheduler;
 
 namespace FileBackuper.TestConsole
 {
@@ -66,6 +69,7 @@ namespace FileBackuper.TestConsole
             InitializeMenu();
 
             Console.WriteLine("FileBackuper.TestConsole, version: 1.0");
+            Console.WriteLine("Location: {0}", Assembly.GetExecutingAssembly().Location.Substring(0, Assembly.GetExecutingAssembly().Location.LastIndexOf('\\')));
 
             do
             {
@@ -142,11 +146,50 @@ namespace FileBackuper.TestConsole
             quartz.Key = ConsoleKey.Q;
             quartz.Action = TestQuartzScheduling;
 
+            // Test Backuper
+            MenuItem backuper = new MenuItem();
+            backuper.Name = "Backuper";
+            backuper.Description = "Tries to use Backuper on dummy profile";
+            backuper.Key = ConsoleKey.B;
+            backuper.Action = TestBackuper;
+
+            // Test TaskScheduler
+            MenuItem tasksch = new MenuItem();
+            tasksch.Name = "TaskScheduler";
+            tasksch.Description = "Creates Windows task (run notepad after some timespan).";
+            tasksch.Key = ConsoleKey.S;
+            tasksch.Action = TestTaskScheduler;
+
+            // Test scheduler
+            MenuItem scheduler = new MenuItem();
+            scheduler.Name = "Scheduler(MY)";
+            scheduler.Description = "Runs scheduling tasks";
+            scheduler.Key = ConsoleKey.M;
+            scheduler.Action = TestScheduler;
+
+            // HourMinute
+            MenuItem hm = new MenuItem();
+            hm.Name = "HourMinute";
+            hm.Description = "Tests HourMinute class";
+            hm.Key = ConsoleKey.H;
+            hm.Action = TestHourMinute;
+
+            MenuItem sm = new MenuItem();
+            sm.Name = "SettingsManager";
+            sm.Description = "Test SettingsManager";
+            sm.Key = ConsoleKey.N;
+            sm.Action = TestSettingsManager;
+
             mainMenu.Add(zipFolder);
             mainMenu.Add(logger);
             mainMenu.Add(factory);
             mainMenu.Add(zipper);
             mainMenu.Add(quartz);
+            mainMenu.Add(backuper);
+            mainMenu.Add(tasksch);
+            mainMenu.Add(scheduler);
+            mainMenu.Add(hm);
+            mainMenu.Add(sm);
 
             mainMenu.Add(exit);
             selectedMenu = mainMenu;
@@ -189,10 +232,15 @@ namespace FileBackuper.TestConsole
             Console.WriteLine("Writing to log {0} ...", setup.Output);
             using (Logger log = new Logger(setup))
             {
-                log.AddFatal("Some fatal error occured!! :D");
-                log.AddError("Less important error.");
-                log.AddWarning("Warning, nobody cares ...");
-                log.AddNote("Note? Why is it here??");
+                log.Fatal("Some fatal error occured!! :D");
+                log.Error("Less important error.");
+                log.Warn("Warning, nobody cares ...");
+                log.Info("Note? Why is it here??");
+
+                log.Fatal("Some string {0:dd.MM.yyyy}", DateTime.Now);
+                log.Error("Some string {0:dd.MM.yyyy}", DateTime.Now);
+                log.Warn("Some string {0:dd.MM.yyyy}", DateTime.Now);
+                log.Info("Some string {0:dd.MM.yyyy}", DateTime.Now);
             }
             Console.WriteLine("Test completed.");
 
@@ -205,10 +253,10 @@ namespace FileBackuper.TestConsole
             Logger log = LoggerFactory.Logger;
             Console.WriteLine("Writing to log file {0} ...", log.Setup.Output);
 
-            log.AddFatal("Some fatal error occured!! :D");
-            log.AddError("Less important error.");
-            log.AddWarning("Warning, nobody cares ...");
-            log.AddNote("Note? Why is it here??");
+            log.Fatal("Some fatal error occured!! :D");
+            log.Error("Less important error.");
+            log.Warn("Warning, nobody cares ...");
+            log.Info("Note? Why is it here??");
 
             Console.WriteLine("Test completed.");
 
@@ -224,8 +272,10 @@ namespace FileBackuper.TestConsole
             p.FileNamePattern = "ProfileName_yyyy-MM-dd";
             //p.FileNamePattern = "ProfileName";
             p.Units.Add(new ZipUnit(UnitType.Folder, @"C:\Temp\Log2"));
+            p.Units.Add(new ZipUnit(UnitType.File, @"D:\Documents\Documents\EBooks\GWT\2343932-Google-Web-Toolkit-Tutorial.pdf"));
 
             Console.WriteLine("Creating zipper instance ...");
+            Console.WriteLine("Profile(Name={0},OutputFolder={1}).", p.Name, p.OutputFolder);
             Zipper zppr = new Zipper();
             zppr.Zip(p);
             Console.WriteLine("Test completed.");
@@ -254,6 +304,135 @@ namespace FileBackuper.TestConsole
             return true;
         }
 
+        static bool TestBackuper(List<MenuItem> submenu)
+        {
+            Console.WriteLine("Testing Backuper using dummy profile ...");
+            string root = @"C:\Temp\FileBackuper\Profiles\Dummy profile";
+
+            Console.WriteLine("Creating dummy files ...");
+            Directory.CreateDirectory(root);
+            File.Create(root + @"\Dummy1.zip").Close();
+            File.Create(root + @"\Dummy2.zip").Close();
+            File.Create(root + @"\Dummy3.zip").Close();
+            File.Create(root + @"\Dummy4.zip").Close();
+            File.Create(root + @"\ToBackup.txt").Close();
+
+            Console.WriteLine("Creating profile ...");
+            Profile p = new Profile();
+            p.Name = "Dummy";
+            p.FileNamePattern = "ProfileName_yyyy-MM-dd";
+            p.OutputFolder = root;
+            p.Units.Add(new ZipUnit(UnitType.File, root + @"\ToBackup.txt"));
+            p.VersionsNames.Add(root + @"\Dummy1.zip");
+            p.VersionsNames.Add(root + @"\Dummy2.zip");
+            p.VersionsNames.Add(root + @"\Dummy3.zip");
+            p.VersionsNames.Add(root + @"\Dummy4.zip");
+            p.NumberOfVersions = 3;
+
+            Console.WriteLine("Creating Backuper and calling Backup method ...");
+            Backuper b = new Backuper();
+            b.Backup(p);
+
+            Console.WriteLine("Test completed.");
+            return true;
+        }
+
+        static bool TestTaskScheduler(List<MenuItem> submenu)
+        {
+            Console.WriteLine("Testing TaskScheduler lib ...");
+
+            #region DUMMY PROFILE
+            /*string root = @"C:\Temp\FileBackuper\Profiles\Dummy profile";
+
+            Console.WriteLine("Creating dummy files ...");
+            Directory.CreateDirectory(root);
+            File.Create(root + @"\Dummy1.zip").Close();
+            File.Create(root + @"\Dummy2.zip").Close();
+            File.Create(root + @"\Dummy3.zip").Close();
+            File.Create(root + @"\Dummy4.zip").Close();
+            File.Create(root + @"\ToBackup.txt").Close();
+
+            Console.WriteLine("Creating profile ...");
+            Profile p = new Profile();
+            p.Name = "Dummy";
+            p.FileNamePattern = "ProfileName_yyyy-MM-dd_HH-mm-ss";
+            p.OutputFolder = root;
+            p.Period = TimePeriod.OneHour;
+            p.Units.Add(new ZipUnit(UnitType.File, root + @"\ToBackup.txt"));
+            p.VersionsNames.Add(root + @"\Dummy1.zip");
+            p.VersionsNames.Add(root + @"\Dummy2.zip");
+            p.VersionsNames.Add(root + @"\Dummy3.zip");
+            p.VersionsNames.Add(root + @"\Dummy4.zip");
+            p.NumberOfVersions = 4;*/
+            #endregion
+
+            string name = String.Format("FileBackuperTestConsole{0:ffff}", DateTime.Now);
+            Console.WriteLine("Creating Task called '{0}' ...", name);
+            using (ScheduledTasks st = new ScheduledTasks())
+            {
+                DateTime dt = DateTime.Now.Add(new TimeSpan(0, 2, 0));
+                Task t = st.CreateTask(name);
+                t.Triggers.Add(new RunOnceTrigger(dt));
+                t.ApplicationName = @"C:\Windows\System32\notepad.exe";
+                t.Creator = "Marek";
+                t.WorkingDirectory = @"C:\Temp";
+                t.Flags = TaskFlags.RunOnlyIfLoggedOn;
+                t.SetAccountInformation(@"NT AUTHORITY\LOCAL SERVICE", (string) null);
+                t.MaxRunTime = new TimeSpan(1, 0, 0);
+                t.Priority = System.Diagnostics.ProcessPriorityClass.High;
+                t.IdleWaitDeadlineMinutes = 20;
+                t.IdleWaitMinutes = 10;
+
+                t.Save();
+                t.Close();
+                Console.WriteLine("Task created ...");
+                Console.WriteLine("Wait, created: {0:HH:mm:ss,ffff}, will trigger: {1:HH:mm:ss,ffff} ...", DateTime.Now, dt);
+            }
+
+            return true;
+        }
+
+        static bool TestScheduler(List<MenuItem> submenu)
+        {
+            Console.WriteLine("Testing Scheduler(MY) ...");
+            Console.WriteLine("Using profile called '{0}' ...", "TestScheduler");
+
+            Logic.Scheduler sc = new Logic.Scheduler();
+            sc.OnSchedule("New Profile");
+
+            Console.WriteLine("Test completed.");
+            return true;
+        }
+
+        static bool TestHourMinute(List<MenuItem> submenu)
+        {
+            Console.WriteLine("Testing class HourMinute ...");
+
+            HourMinute hm = new HourMinute(5, 12);
+
+            Console.WriteLine("HourMinute({0},{1})", hm.Hour, hm.Minute);
+
+            Console.WriteLine("ToMinutes = {0}", hm.ToMinutes());
+            Console.WriteLine("ToHours = {0}", hm.ToHours());
+            Console.WriteLine("Test completed.");
+
+            return true;
+        }
+
+        static bool TestSettingsManager(List<MenuItem> submenu)
+        {
+            Console.WriteLine(@"Loads path a then set it to C:\Temp\FileBackuper\Config.xml"); ;
+            //Settings s = new Settings();
+            Configuration s = ConfigurationManager.LoadFromResource();
+
+            Console.WriteLine("Loaded path: " + s.ConfigPath);
+
+            s.ConfigPath = @"C:\Temp\FileBackuper\Config.xml";
+            s.LogDirPath = @"C:\Temp\FileBackuper\Log";
+            ConfigurationManager.SaveToResource(s);
+            return true;
+        }
+
         #endregion
     }
 
@@ -266,3 +445,4 @@ namespace FileBackuper.TestConsole
         }
     }
 }
+;
