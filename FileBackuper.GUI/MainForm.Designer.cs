@@ -34,6 +34,11 @@
             this.sslMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.tspProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.tlsMainMenu = new System.Windows.Forms.ToolStrip();
+            this.tsbSaveConfig = new System.Windows.Forms.ToolStripButton();
+            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
+            this.tsbAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsbWeb = new System.Windows.Forms.ToolStripButton();
+            this.tsbConfig = new System.Windows.Forms.ToolStripButton();
             this.lvwProfiles = new System.Windows.Forms.ListView();
             this.chdName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chdDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,19 +47,14 @@
             this.chdDisabled = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblCount = new System.Windows.Forms.Label();
             this.totToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tmrInterval = new System.Windows.Forms.Timer(this.components);
-            this.pnlProfileControls = new System.Windows.Forms.Panel();
-            this.tmrPostLoadAction = new System.Windows.Forms.Timer(this.components);
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClearBackups = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.tsbSaveConfig = new System.Windows.Forms.ToolStripButton();
-            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
-            this.tsbAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsbWeb = new System.Windows.Forms.ToolStripButton();
-            this.tsbConfig = new System.Windows.Forms.ToolStripButton();
+            this.tmrInterval = new System.Windows.Forms.Timer(this.components);
+            this.pnlProfileControls = new System.Windows.Forms.Panel();
+            this.tmrPostLoadAction = new System.Windows.Forms.Timer(this.components);
             this.stsStatus.SuspendLayout();
             this.tlsMainMenu.SuspendLayout();
             this.pnlProfileControls.SuspendLayout();
@@ -103,6 +103,57 @@
             this.tlsMainMenu.Size = new System.Drawing.Size(709, 25);
             this.tlsMainMenu.TabIndex = 1;
             this.tlsMainMenu.Text = "toolStrip1";
+            // 
+            // tsbSaveConfig
+            // 
+            this.tsbSaveConfig.Image = global::FileBackuper.GUI.Properties.Resources.save;
+            this.tsbSaveConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveConfig.Name = "tsbSaveConfig";
+            this.tsbSaveConfig.Size = new System.Drawing.Size(93, 22);
+            this.tsbSaveConfig.Text = "Save profiles";
+            this.tsbSaveConfig.Click += new System.EventHandler(this.tsbSaveConfig_Click);
+            // 
+            // tsbRefresh
+            // 
+            this.tsbRefresh.Image = global::FileBackuper.GUI.Properties.Resources.repeat;
+            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRefresh.Name = "tsbRefresh";
+            this.tsbRefresh.Size = new System.Drawing.Size(108, 22);
+            this.tsbRefresh.Text = "Refresh profiles";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
+            // tsbAbout
+            // 
+            this.tsbAbout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAbout.Image = global::FileBackuper.GUI.Properties.Resources.help;
+            this.tsbAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAbout.Name = "tsbAbout";
+            this.tsbAbout.Size = new System.Drawing.Size(23, 22);
+            this.tsbAbout.Text = "About";
+            this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
+            // 
+            // tsbWeb
+            // 
+            this.tsbWeb.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbWeb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbWeb.Image = global::FileBackuper.GUI.Properties.Resources.web;
+            this.tsbWeb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbWeb.Name = "tsbWeb";
+            this.tsbWeb.Size = new System.Drawing.Size(23, 22);
+            this.tsbWeb.Text = "Homepage, http://dev.neptuo.com";
+            this.tsbWeb.Click += new System.EventHandler(this.tsbWeb_Click);
+            // 
+            // tsbConfig
+            // 
+            this.tsbConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbConfig.Image = global::FileBackuper.GUI.Properties.Resources.config;
+            this.tsbConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbConfig.Name = "tsbConfig";
+            this.tsbConfig.Size = new System.Drawing.Size(23, 22);
+            this.tsbConfig.Text = "Configuration";
+            this.tsbConfig.Click += new System.EventHandler(this.tsbConfig_Click);
             // 
             // lvwProfiles
             // 
@@ -160,29 +211,6 @@
             this.lblCount.Size = new System.Drawing.Size(49, 13);
             this.lblCount.TabIndex = 100;
             this.lblCount.Text = "0 profiles";
-            // 
-            // tmrInterval
-            // 
-            this.tmrInterval.Tick += new System.EventHandler(this.tmrInterval_Tick);
-            // 
-            // pnlProfileControls
-            // 
-            this.pnlProfileControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlProfileControls.Controls.Add(this.lblCount);
-            this.pnlProfileControls.Controls.Add(this.btnBackup);
-            this.pnlProfileControls.Controls.Add(this.btnCreate);
-            this.pnlProfileControls.Controls.Add(this.btnClearBackups);
-            this.pnlProfileControls.Controls.Add(this.btnEdit);
-            this.pnlProfileControls.Controls.Add(this.btnDelete);
-            this.pnlProfileControls.Location = new System.Drawing.Point(12, 322);
-            this.pnlProfileControls.Name = "pnlProfileControls";
-            this.pnlProfileControls.Size = new System.Drawing.Size(685, 34);
-            this.pnlProfileControls.TabIndex = 9;
-            // 
-            // tmrPostLoadAction
-            // 
-            this.tmrPostLoadAction.Tick += new System.EventHandler(this.tmrPostLoadAction_Tick);
             // 
             // btnBackup
             // 
@@ -259,56 +287,28 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // tsbSaveConfig
+            // tmrInterval
             // 
-            this.tsbSaveConfig.Image = global::FileBackuper.GUI.Properties.Resources.save;
-            this.tsbSaveConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSaveConfig.Name = "tsbSaveConfig";
-            this.tsbSaveConfig.Size = new System.Drawing.Size(93, 22);
-            this.tsbSaveConfig.Text = "Save profiles";
-            this.tsbSaveConfig.Click += new System.EventHandler(this.tsbSaveConfig_Click);
+            this.tmrInterval.Tick += new System.EventHandler(this.tmrInterval_Tick);
             // 
-            // tsbRefresh
+            // pnlProfileControls
             // 
-            this.tsbRefresh.Image = global::FileBackuper.GUI.Properties.Resources.repeat;
-            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Size = new System.Drawing.Size(108, 22);
-            this.tsbRefresh.Text = "Refresh profiles";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            this.pnlProfileControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlProfileControls.Controls.Add(this.lblCount);
+            this.pnlProfileControls.Controls.Add(this.btnBackup);
+            this.pnlProfileControls.Controls.Add(this.btnCreate);
+            this.pnlProfileControls.Controls.Add(this.btnClearBackups);
+            this.pnlProfileControls.Controls.Add(this.btnEdit);
+            this.pnlProfileControls.Controls.Add(this.btnDelete);
+            this.pnlProfileControls.Location = new System.Drawing.Point(12, 322);
+            this.pnlProfileControls.Name = "pnlProfileControls";
+            this.pnlProfileControls.Size = new System.Drawing.Size(685, 34);
+            this.pnlProfileControls.TabIndex = 9;
             // 
-            // tsbAbout
+            // tmrPostLoadAction
             // 
-            this.tsbAbout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbAbout.Image = global::FileBackuper.GUI.Properties.Resources.help;
-            this.tsbAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAbout.Name = "tsbAbout";
-            this.tsbAbout.Size = new System.Drawing.Size(23, 22);
-            this.tsbAbout.Text = "About";
-            this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
-            // 
-            // tsbWeb
-            // 
-            this.tsbWeb.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbWeb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbWeb.Image = global::FileBackuper.GUI.Properties.Resources.web;
-            this.tsbWeb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbWeb.Name = "tsbWeb";
-            this.tsbWeb.Size = new System.Drawing.Size(23, 22);
-            this.tsbWeb.Text = "Homepage, http://dev.neptuo.com";
-            this.tsbWeb.Click += new System.EventHandler(this.tsbWeb_Click);
-            // 
-            // tsbConfig
-            // 
-            this.tsbConfig.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbConfig.Image = global::FileBackuper.GUI.Properties.Resources.config;
-            this.tsbConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbConfig.Name = "tsbConfig";
-            this.tsbConfig.Size = new System.Drawing.Size(23, 22);
-            this.tsbConfig.Text = "Configuration";
-            this.tsbConfig.Click += new System.EventHandler(this.tsbConfig_Click);
+            this.tmrPostLoadAction.Tick += new System.EventHandler(this.tmrPostLoadAction_Tick);
             // 
             // MainForm
             // 

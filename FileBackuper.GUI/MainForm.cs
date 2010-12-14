@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using FileBackuper.Logic;
 using FileBackuper.Model;
+using System.IO;
 
 namespace FileBackuper.GUI
 {
@@ -44,9 +45,16 @@ namespace FileBackuper.GUI
             
             //LoadProfilesFromConfiguration(configuration);
 
-            profileManager = new ProfileManager(configuration.ConfigPath);
-            //profileManager = new ProfileManager(ModelUtil.PathToConfigurationFile(this.GetType()));
-            profileManager.Load();
+            try
+            {
+                profileManager = new ProfileManager(configuration.ConfigPath);
+                //profileManager = new ProfileManager(ModelUtil.PathToConfigurationFile(this.GetType()));
+                profileManager.Load();
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Sorry, but file configuration doesn't exist! Go to configration and create new one or select corect path!", "FileBackuper");
+            }
 
             taskManager = new ScheduledTaskManager();
 
