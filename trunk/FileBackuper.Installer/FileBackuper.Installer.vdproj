@@ -21,55 +21,55 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2775C9BC2FC723213E37E87EF6D32A49"
+        "MsmKey" = "8:_30EBAE25894AF23BC96D1DE7EE96455D"
         "OwnerKey" = "8:_F0BED9658B1E432BB75B4C00D53FCC77"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_28C29AF4D126C2946CA15A2BDECB640E"
+        "MsmKey" = "8:_7A73CC17DEA41B2D4375589AF7CC90C3"
+        "OwnerKey" = "8:_8EF188864AE565FA47563C2688940BB3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A73CC17DEA41B2D4375589AF7CC90C3"
         "OwnerKey" = "8:_F0BED9658B1E432BB75B4C00D53FCC77"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_61AB216AA30291847189E02589AF93AC"
-        "OwnerKey" = "8:_2775C9BC2FC723213E37E87EF6D32A49"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_61AB216AA30291847189E02589AF93AC"
+        "MsmKey" = "8:_8EF188864AE565FA47563C2688940BB3"
         "OwnerKey" = "8:_F0BED9658B1E432BB75B4C00D53FCC77"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6867ED0528E048EFBD5F40753A596D7C"
+        "MsmKey" = "8:_9F7A086EEC7941518FABF2335302B1EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6EB0B83B8319C891A0B6CED8352277C4"
-        "OwnerKey" = "8:_2775C9BC2FC723213E37E87EF6D32A49"
+        "MsmKey" = "8:_B051092C287966D067847588E5563526"
+        "OwnerKey" = "8:_8EF188864AE565FA47563C2688940BB3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6EB0B83B8319C891A0B6CED8352277C4"
+        "MsmKey" = "8:_B051092C287966D067847588E5563526"
         "OwnerKey" = "8:_F0BED9658B1E432BB75B4C00D53FCC77"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A73CC17DEA41B2D4375589AF7CC90C3"
-        "OwnerKey" = "8:_2775C9BC2FC723213E37E87EF6D32A49"
+        "MsmKey" = "8:_EDD592EB67D19FE90D37A14D1F17F80E"
+        "OwnerKey" = "8:_8EF188864AE565FA47563C2688940BB3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A73CC17DEA41B2D4375589AF7CC90C3"
+        "MsmKey" = "8:_EDD592EB67D19FE90D37A14D1F17F80E"
         "OwnerKey" = "8:_F0BED9658B1E432BB75B4C00D53FCC77"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -88,31 +88,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2775C9BC2FC723213E37E87EF6D32A49"
+        "OwnerKey" = "8:_8EF188864AE565FA47563C2688940BB3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_61AB216AA30291847189E02589AF93AC"
+        "OwnerKey" = "8:_B051092C287966D067847588E5563526"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6EB0B83B8319C891A0B6CED8352277C4"
+        "OwnerKey" = "8:_EDD592EB67D19FE90D37A14D1F17F80E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_30EBAE25894AF23BC96D1DE7EE96455D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7A73CC17DEA41B2D4375589AF7CC90C3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28C29AF4D126C2946CA15A2BDECB640E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -140,6 +140,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -164,6 +177,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -214,133 +240,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2775C9BC2FC723213E37E87EF6D32A49"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FileBackuper.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_2775C9BC2FC723213E37E87EF6D32A49"
-                    {
-                    "Name" = "8:FileBackuper.Logic.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FileBackuper.Logic.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_28C29AF4D126C2946CA15A2BDECB640E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_30EBAE25894AF23BC96D1DE7EE96455D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:FileBackuper.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_28C29AF4D126C2946CA15A2BDECB640E"
+                    "_30EBAE25894AF23BC96D1DE7EE96455D"
                     {
                     "Name" = "8:FileBackuper.Controls.dll"
                     "Attributes" = "3:512"
                     }
                 }
             "SourcePath" = "8:FileBackuper.Controls.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_61AB216AA30291847189E02589AF93AC"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FileBackuper.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_61AB216AA30291847189E02589AF93AC"
-                    {
-                    "Name" = "8:FileBackuper.Model.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FileBackuper.Model.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6867ED0528E048EFBD5F40753A596D7C"
-            {
-            "SourcePath" = "8:..\\FileBackuper.GUI\\Settings.resx"
-            "TargetName" = "8:Settings.resx"
-            "Tag" = "8:"
-            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6EB0B83B8319C891A0B6CED8352277C4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:TaskScheduler, Version=1.3.2889.25680, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_6EB0B83B8319C891A0B6CED8352277C4"
-                    {
-                    "Name" = "8:TaskScheduler.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:TaskScheduler.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
@@ -372,6 +285,119 @@
                     }
                 }
             "SourcePath" = "8:Ionic.Zip.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8EF188864AE565FA47563C2688940BB3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FileBackuper.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8EF188864AE565FA47563C2688940BB3"
+                    {
+                    "Name" = "8:FileBackuper.Logic.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FileBackuper.Logic.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9F7A086EEC7941518FABF2335302B1EB"
+            {
+            "SourcePath" = "8:..\\FileBackuper.TestConsole\\bin\\Debug\\Settings.resx"
+            "TargetName" = "8:Settings.resx"
+            "Tag" = "8:"
+            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B051092C287966D067847588E5563526"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FileBackuper.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B051092C287966D067847588E5563526"
+                    {
+                    "Name" = "8:FileBackuper.Model.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FileBackuper.Model.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EDD592EB67D19FE90D37A14D1F17F80E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:TaskScheduler, Version=1.3.2889.25680, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EDD592EB67D19FE90D37A14D1F17F80E"
+                    {
+                    "Name" = "8:TaskScheduler.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:TaskScheduler.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
@@ -457,7 +483,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FileBackuper"
         "ProductCode" = "8:{A7CA3E59-596B-4431-BBD9-6ACEBDFCAB7E}"
-        "PackageCode" = "8:{8D1C32F5-BD7E-44E8-BE93-BB0497735352}"
+        "PackageCode" = "8:{56F15050-9C94-47A6-9543-2D0D958300A6}"
         "UpgradeCode" = "8:{39A9E8C6-C43A-40BF-95D3-2BD522A57525}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1006,7 +1032,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F0BED9658B1E432BB75B4C00D53FCC77"
             {
-            "SourcePath" = "8:..\\FileBackuper.GUI\\obj\\x86\\Debug\\FileBackuper.GUI.exe"
+            "SourcePath" = "8:..\\FileBackuper.GUI\\obj\\x86\\Release\\FileBackuper.GUI.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ECF670DA6332462C9A5B47D64B43024B"
