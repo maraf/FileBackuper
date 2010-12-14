@@ -12,7 +12,7 @@ using FileBackuper.Model;
 namespace FileBackuper.GUI
 {
     /// <summary>
-    /// Delegat pro obsluhu tlacitek
+    /// Delegate pro obsluhu tlacitek
     /// </summary>
     /// <param name="sender">Komponenta, ktera ho vyvolala</param>
     /// <param name="e">Argumenty udalosti</param>
@@ -28,10 +28,22 @@ namespace FileBackuper.GUI
     /// </summary>
     public partial class ProfileDetail : Form
     {
+        /// <summary>
+        /// Udalost vyvolana kliknutim na tlacitko "Save"
+        /// Upravuje hodnoty v property <code>Profile</code>
+        /// </summary>
         public event DetailButtonHandler SaveButtonClicked;
 
+        /// <summary>
+        /// Udalost vyvolana kliknutim na tlacitko "Save and Close"
+        /// Upravuje hodnoty v property <code>Profile</code>
+        /// </summary>
         public event DetailButtonHandler SaveAndCloseButtonClicked;
 
+        /// <summary>
+        /// Udalost vyvolana klinutim na tlacitko "Close"
+        /// NEupravuje hodnoty v property <code>Profile</code>!
+        /// </summary>
         public event DetailButtonHandler CloseButtonClicked;
 
         /// <summary>
@@ -46,12 +58,17 @@ namespace FileBackuper.GUI
 
         private Dictionary<string, TimePeriod[]> patterns = new Dictionary<string, TimePeriod[]>();
 
+        /// <summary>
+        /// Vytvori a inicialuje detail profilu
+        /// </summary>
+        /// <param name="profile">Data pro zobrazeni</param>
         public ProfileDetail(Profile profile)
         {
             InitializeComponent();
-            InitializePatters();
+            InitializePatterns();
 
             Profile = profile;
+            Text = "FileBackuper - Profile detail: " + Profile.Name;
 
             tbxName.Focus();
         }
@@ -59,7 +76,7 @@ namespace FileBackuper.GUI
         /// <summary>
         /// Vytvori slovnik vzoru nazvu souboru
         /// </summary>
-        private void InitializePatters()
+        private void InitializePatterns()
         {
             TimePeriod[] cols1 = { TimePeriod.NoPeriod };
             patterns.Add("ProfileName", cols1);
@@ -80,7 +97,9 @@ namespace FileBackuper.GUI
             dsrOutputFolder.Value = Profile.OutputFolder;
             cbxPeriod.SelectedIndex = (int) Profile.Period;
             nudNumberOfVersions.Value = Profile.NumberOfVersions;
-            cbxDisabled.Checked = Profile.Disabled;
+            chxDisabled.Checked = Profile.Disabled;
+            nudHours.Value = Profile.StartAt.Hour;
+            nudMinutes.Value = Profile.StartAt.Minute;
 
             UpdateFileNamePatternsItems(Profile.Period);
 
@@ -111,7 +130,9 @@ namespace FileBackuper.GUI
             Profile.Period = (TimePeriod) cbxPeriod.SelectedIndex;
             Profile.NumberOfVersions = (int) nudNumberOfVersions.Value;
             Profile.FileNamePattern = (string) cbxFileNamePattern.SelectedItem;
-            Profile.Disabled = cbxDisabled.Checked;
+            Profile.Disabled = chxDisabled.Checked;
+            Profile.StartAt.Hour = (int) nudHours.Value;
+            Profile.StartAt.Minute = (int) nudMinutes.Value;
 
             Profile.Units.Clear();
             foreach (ListViewItem item in lvwUnits.Items)
@@ -145,6 +166,7 @@ namespace FileBackuper.GUI
         public void ShowMessage(string message, MessageType type)
         {
             lblMessage.Text = message.Length > 60 ? message.Substring(0, 40) + " ..." : message;
+            totToolTip.SetToolTip(this.lblMessage, message);
             Color[] colors = { Color.Red, Color.Orange, Color.Green};
             lblMessage.ForeColor = colors[(int) type];
             lblMessage.Visible = true;
@@ -211,6 +233,11 @@ namespace FileBackuper.GUI
             return false;
         }
 
+        /// <summary>
+        /// Zprostredkovava volani handleru
+        /// </summary>
+        /// <param name="dlg">Delegate</param>
+        /// <param name="pList">Parametry</param>
         protected void Fire(Delegate dlg, params object[] pList)
         {
             if (dlg != null)
@@ -222,23 +249,39 @@ namespace FileBackuper.GUI
         protected virtual void btnClose_Click(object sender, EventArgs e)
         {
             Fire(CloseButtonClicked, this, e);
+            HideMessage();
         }
 
         protected virtual void btnSaveAndClose_Click(object sender, EventArgs e)
         {
             GetUIComponentsValues();
+            HideMessage();
             Fire(SaveAndCloseButtonClicked, this, e);
         }
 
         protected virtual void btnSave_Click(object sender, EventArgs e)
         {
             GetUIComponentsValues();
+            HideMessage();
             Fire(SaveButtonClicked, this, e);
         }
 
         private void cbxPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFileNamePatternsItems(ModelUtil.StringToTimePeriod((string) cbxPeriod.SelectedItem));
+
+            //if (cbxPeriod.SelectedIndex == 0)
+            //{
+            //    lblStartAt.Enabled = false;
+            //    nudHours.Enabled = false;
+            //    nudMinutes.Enabled = false;
+            //}
+            //else
+            //{
+            //    lblStartAt.Enabled = true;
+            //    nudHours.Enabled = true;
+            //    nudMinutes.Enabled = true;
+            //}
         }
 
         private void rbnFile_CheckedChanged(object sender, EventArgs e)
@@ -308,7 +351,7 @@ namespace FileBackuper.GUI
             }
             else
             {
-                ShowMessage("You select file or folder!", MessageType.Error);
+                ShowMessage("First, select file or folder!", MessageType.Error);
             }
         }
 

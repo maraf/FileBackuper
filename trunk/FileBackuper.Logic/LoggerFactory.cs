@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text;
+using FileBackuper.Model;
 
 
 namespace FileBackuper.Logging
@@ -11,6 +12,7 @@ namespace FileBackuper.Logging
     /// Tovarna na logovaci soubory
     /// TODO: - vytazeni konfigurace z konfiguracniho souboru pro TRACE
     ///       - nastaveni urovne logovani pro TRACE
+    ///       - vytvoreni custom logu jen se zadanim cesty k log souboru
     /// </summary>
     [LogDir(@"C:\Temp\FileBackuper\Log")]
     [LogNamePattern("{0:yyyy-MM-dd}.log")]
@@ -77,10 +79,12 @@ namespace FileBackuper.Logging
 #endif
 #if TRACE
             // Load it from Settings.resx or other configuration file
+            //throw new NotImplementedException("TRACE LoggerFactory config");
+            LogDir = ConfigurationManager.LoadFromResource().LogDirPath;
 #endif
             Setup = new LoggerSetup();
             Setup.AutoClose = true;
-            Setup.Level = LogLevel.Note;
+            Setup.Level = LogLevel.Info;
             LogDir = (LogDir.EndsWith(@"\") ? LogDir : LogDir.EndsWith(@"/") ? LogDir : String.Format(@"{0}\", LogDir));
             Setup.Output = String.Format(LogDir + NamePattern, DateTime.Now);
 

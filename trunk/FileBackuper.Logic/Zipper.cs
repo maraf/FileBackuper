@@ -15,16 +15,19 @@ namespace FileBackuper.Logic
     /// </summary>
     public class Zipper
     {
-
+        /// <summary>
+        /// Vytvori instanci
+        /// </summary>
         public Zipper() { }
 
         /// <summary>
         /// Provede zipovani profilu
         /// </summary>
         /// <param name="profile">Profil k zipovani</param>
-        public void Zip(Profile profile)
+        /// <returns>Nazev ulozeneho souboru</returns>
+        public string Zip(Profile profile)
         {
-            Zip(profile, LoggerFactory.Logger);
+            return Zip(profile, LoggerFactory.Logger);
         }
 
         /// <summary>
@@ -33,7 +36,8 @@ namespace FileBackuper.Logic
         /// </summary>
         /// <param name="profile">Profil k zipovani</param>
         /// <param name="log">Custom log</param>
-        public void Zip(Profile profile, Logger log)
+        /// <returns>Nazev ulozeneho souboru</returns>
+        public string Zip(Profile profile, Logger log)
         {
             string datePattern = profile.FileNamePattern.Substring(profile.FileNamePattern.IndexOf('_') + 1);
             string outputFileName;
@@ -46,7 +50,7 @@ namespace FileBackuper.Logic
                 outputFileName = String.Format(@"{0}\{1}.zip", profile.OutputFolder, profile.Name).Replace("ProfileName", profile.Name);
             }
 
-            log.AddNote(String.Format("Zipping profile({0}), date({1:" + datePattern + "}) to {2}.", profile.Name, DateTime.Now, outputFileName));
+            log.Info(String.Format("Zipper: zipping profile({0}), date({1:" + datePattern + "}) to {2}.", profile.Name, DateTime.Now, outputFileName));
 
             try
             {
@@ -57,7 +61,7 @@ namespace FileBackuper.Logic
                     {
                         if (unit.UnitType.Equals(UnitType.File))
                         {
-                            zip.AddFile(unit.Path);
+                            zip.AddFile(unit.Path, "/");
                         }
                         else
                         {
@@ -67,11 +71,13 @@ namespace FileBackuper.Logic
                     }
                     zip.Save(outputFileName);
                 }
-                log.AddNote("Zip created.");
+                log.Info("Zipper: profile({0}): zip created.", outputFileName);
+                return outputFileName;
             }
             catch (Exception e)
             {
-                log.AddFatal(String.Format("Exception thrown during zipping profile(name={0})! Message:{1}", profile.Name, e.Message));
+                log.Fatal(String.Format("Exception thrown during zipping profile(name={0})! Message:{1}", profile.Name, e.Message));
+                return null;
             }
         }
     }

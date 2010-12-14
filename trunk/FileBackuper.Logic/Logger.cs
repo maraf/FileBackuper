@@ -9,7 +9,7 @@ namespace FileBackuper.Logging
     /// <summary>
     /// Levely logovani
     /// </summary>
-    public enum LogLevel { Fatal, Error, Warn, Note };
+    public enum LogLevel { Fatal, Error, Warn, Info };
 
     /// <summary>
     /// Vyjimka vyhazovani loggerem
@@ -75,7 +75,7 @@ namespace FileBackuper.Logging
             get { return level; }
             set { level = value; }
         }
-        protected LogLevel level = LogLevel.Note;
+        protected LogLevel level = LogLevel.Info;
 
         public LoggerSetup()
         {
@@ -150,36 +150,76 @@ namespace FileBackuper.Logging
         /// Prida zpravu levelu fatal
         /// </summary>
         /// <param name="message">Obsah zpravy</param>
-        public void AddFatal(string message)
+        public void Fatal(string message)
         {
             Log(LogLevel.Fatal, message);
+        }
+
+        /// <summary>
+        /// Prida zpravu levelu fatal
+        /// </summary>
+        /// <param name="message">Obsah zpravy</param>
+        /// <param name="args">Seznam argumentu do formatovaciho retezce</param>
+        public void Fatal(string message, params object[] args)
+        {
+            Log(LogLevel.Fatal, String.Format(message, args));
         }
 
         /// <summary>
         /// Prida zpravu levelu error
         /// </summary>
         /// <param name="message">Obsah zpravy</param>
-        public void AddError(string message)
+        public void Error(string message)
         {
             Log(LogLevel.Error, message);
+        }
+
+        /// <summary>
+        /// Prida zpravu levelu error
+        /// </summary>
+        /// <param name="message">Obsah zpravy</param>
+        /// <param name="args">Seznam argumentu do formatovaciho retezce</param>
+        public void Error(string message, params object[] args)
+        {
+            Log(LogLevel.Error, String.Format(message, args));
         }
 
         /// <summary>
         /// Prida zpravu levelu warning
         /// </summary>
         /// <param name="message">Obsah zpravy</param>
-        public void AddWarning(string message)
+        public void Warn(string message)
         {
             Log(LogLevel.Warn, message);
         }
 
         /// <summary>
-        /// Prida zpravu levelu note
+        /// Prida zpravu levelu warn
         /// </summary>
         /// <param name="message">Obsah zpravy</param>
-        public void AddNote(string message)
+        /// <param name="args">Seznam argumentu do formatovaciho retezce</param>
+        public void Warn(string message, params object[] args)
         {
-            Log(LogLevel.Note, message);
+            Log(LogLevel.Warn, String.Format(message, args));
+        }
+
+        /// <summary>
+        /// Prida zpravu levelu info
+        /// </summary>
+        /// <param name="message">Obsah zpravy</param>
+        public void Info(string message)
+        {
+            Log(LogLevel.Info, message);
+        }
+
+        /// <summary>
+        /// Prida zpravu levelu info
+        /// </summary>
+        /// <param name="message">Obsah zpravy</param>
+        /// <param name="args">Seznam argumentu do formatovaciho retezce</param>
+        public void Info(string message, params object[] args)
+        {
+            Log(LogLevel.Info, String.Format(message, args));
         }
 
         /// <summary>
